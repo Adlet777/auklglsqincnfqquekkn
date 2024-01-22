@@ -12,6 +12,7 @@ spring:
     hibernate:
       ddl-auto: update
 
-#  data:
-#    mongodb:
-#      uri: mongodb://user:password@172.17.0.1:27017/mongo
+  data:
+    mongodb:
+      uri: mongodb+srv://user:DeEdgqXGvAMCd4YP@cluster0.peb9hqn.mongodb.net/Cluster0
+      auto-index-creation: true
