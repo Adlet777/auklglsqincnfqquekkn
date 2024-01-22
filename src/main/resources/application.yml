@@ -3,13 +3,15 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://172.17.0.1:5432/postgres
-    username: user
-    password: password
+    url: jdbc:postgresql://manny.db.elephantsql.com:5432/pokvxlhi
+    username: pokvxlhi
+    password: LiF4parkcvrZPJ-C4j6JC4M_kL7Ts4TG
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
 
-  data:
-    mongodb:
-      uri: mongodb://user:password@172.17.0.1:27017/mongo
+#  data:
+#    mongodb:
+#      uri: mongodb://user:password@172.17.0.1:27017/mongo
