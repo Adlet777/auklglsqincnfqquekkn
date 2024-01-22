@@ -3,13 +3,13 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://172.17.0.1:5432/postgres
     username: user
     password: password
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-#  data:
-#    mongodb:
-#      uri: mongodb://user:password@localhost:27017/mongo
+  data:
+    mongodb:
+      uri: mongodb://user:password@172.17.0.1:27017/mongo
