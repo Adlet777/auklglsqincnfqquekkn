@@ -5,6 +5,7 @@ import dev.adlet.tleubay.auklglsqincnfqquekkn.entity.postgres.PostgresContact;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.repository.mongo.MongoContactRepository;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.repository.postgres.PostgresContactRepository;
 import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * Service that creates data in tables & collections in DBs
  * todo: add logs
  */
+@Service
 public class DataInsertionServiceImpl {
     private final MongoContactRepository mongoRepository;
     private final PostgresContactRepository postgresRepository;
@@ -24,16 +26,18 @@ public class DataInsertionServiceImpl {
 
     @PostConstruct
     public void insertMongoData() {
-        if (mongoRepository.findAll().isEmpty()) {
+        if (mongoRepository.findAll().size() < 3) {
             List<MongoContact> contacts = createMongoContacts();
+            mongoRepository.deleteAll();
             mongoRepository.saveAll(contacts);
         }
     }
 
     @PostConstruct
     public void insertPostgresData() {
-        if (postgresRepository.findAll().isEmpty()) {
+        if (postgresRepository.findAll().size() < 3) {
             List<PostgresContact> contacts = createPostgresContacts();
+            postgresRepository.deleteAll();
             postgresRepository.saveAll(contacts);
         }
     }
