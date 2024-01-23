@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Contact extends ContactSuperClass {
+public class MongoContact extends ContactSuperClass {
     @Field("name")
     private String name;
     @Field("year_of_birth")

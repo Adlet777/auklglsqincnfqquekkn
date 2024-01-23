@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Contact extends ContactSuperClass {
+public class PostgresContact extends ContactSuperClass {
     @Column(name = "name")
     private String name;
     @Column(name = "year_of_birth")
