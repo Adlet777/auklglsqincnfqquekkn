@@ -1,19 +1,27 @@
 package dev.adlet.tleubay.auklglsqincnfqquekkn.service.impl.mongo;
 
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.ContactDTO;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.entity.mongo.MongoContact;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.exception.ContactException;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.mapper.mongo.MongoContactMapper;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.repository.mongo.MongoContactRepository;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.service.ContactService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * todo: add logs/mapping/exceptions
+ */
 @Service
 public class MongoContactService implements ContactService {
     private final MongoContactRepository repository;
+    @Autowired
+    private MongoContactMapper mapper;
 
     public MongoContactService(MongoContactRepository repository) {
         this.repository = repository;
@@ -23,34 +31,37 @@ public class MongoContactService implements ContactService {
     public Page<ContactDTO> getAllContacts() {
         List<ContactDTO> contacts = repository.findAll()
                 .stream()
-                .map(contact -> ContactDTO.builder()
-                        .id(contact.getId())
-                        .name(contact.getName())
-                        .yearOfBirth(contact.getYearOfBirth())
-                        .phoneNumber(contact.getPhoneNumber())
-                        .secondPhoneNumber(contact.getSecondPhoneNumber())
-                        .build()).toList();
+                .map(contact -> mapper.toDTO(contact)).toList();
         return new PageImpl<>(contacts);
     }
 
     @Override
-    public Optional<ContactDTO> getContactById(UUID id) {
-        return Optional.empty();
+    public ContactDTO getContactById(UUID id) {
+        MongoContact contact = repository.findById(id).orElseThrow(() ->
+                new ContactException(""));
+        return mapper.toDTO(contact);
     }
 
     @Override
-    public Optional<ContactDTO> getContactByPhoneNumber(String phoneNumber) {
-        return Optional.empty();
+    public ContactDTO getContactByPhoneNumber(String phoneNumber) {
+        MongoContact contact = repository.findByPhoneNumberOrSecondPhoneNumber(phoneNumber, phoneNumber).orElseThrow(() ->
+                new ContactException(""));
+
+        return mapper.toDTO(contact);
     }
 
     @Override
     public void deleteContactById(UUID id) {
-
+        MongoContact contact = repository.findById(id).orElseThrow(() ->
+                new ContactException(""));
+        repository.delete(contact);
     }
 
     @Override
     public void deleteContactByPhoneNumber(String phoneNumber) {
-
+        MongoContact contact = repository.findByPhoneNumberOrSecondPhoneNumber(phoneNumber, phoneNumber).orElseThrow(() ->
+                new ContactException(""));
+        repository.delete(contact);
     }
 
     @Override
