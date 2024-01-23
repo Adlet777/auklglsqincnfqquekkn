@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class Telephony {
+public abstract class TelephonySuperClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
