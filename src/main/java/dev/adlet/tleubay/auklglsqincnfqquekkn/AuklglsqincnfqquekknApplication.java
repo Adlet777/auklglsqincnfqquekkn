@@ -1,6 +1,6 @@
 package dev.adlet.tleubay.auklglsqincnfqquekkn;
 
-import dev.adlet.tleubay.auklglsqincnfqquekkn.repository.mongo.TelephonyRepository;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.repository.mongo.ContactRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 
-@EnableMongoRepositories(basePackageClasses = TelephonyRepository.class)
+@EnableMongoRepositories(basePackageClasses = ContactRepository.class)
 @EnableJpaRepositories(excludeFilters =
-@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = TelephonyRepository.class))
+@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = ContactRepository.class))
 @SpringBootApplication
 public class AuklglsqincnfqquekknApplication {
 
