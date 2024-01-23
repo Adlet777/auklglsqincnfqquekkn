@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PostgresContactService implements ContactService {
@@ -29,5 +31,35 @@ public class PostgresContactService implements ContactService {
                         .secondPhoneNumber(contact.getSecondPhoneNumber())
                         .build()).toList();
         return new PageImpl<>(contacts);
+    }
+
+    @Override
+    public Optional<ContactDTO> getContactById(UUID id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<ContactDTO> getContactByPhoneNumber(String phoneNumber) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void deleteContactById(UUID id) {
+
+    }
+
+    @Override
+    public void deleteContactByPhoneNumber(String phoneNumber) {
+
+    }
+
+    @Override
+    public ContactDTO updateContactById(UUID id) {
+        return null;
+    }
+
+    @Override
+    public ContactDTO updateContactByPhoneNumber(String phoneNumber) {
+        return null;
     }
 }

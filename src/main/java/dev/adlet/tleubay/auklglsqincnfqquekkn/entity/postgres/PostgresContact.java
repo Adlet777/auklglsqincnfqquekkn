@@ -16,8 +16,8 @@ public class PostgresContact extends ContactSuperClass {
     private String name;
     @Column(name = "year_of_birth")
     private Long yearOfBirth;
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", unique = true)
     private String phoneNumber;
-    @Column(name = "second_phone_number")
+    @Column(name = "second_phone_number", unique = true)
     private String secondPhoneNumber;
 }
