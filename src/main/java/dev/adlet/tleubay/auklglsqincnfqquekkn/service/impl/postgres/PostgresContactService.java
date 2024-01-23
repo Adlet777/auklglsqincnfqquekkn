@@ -1,6 +1,8 @@
 package dev.adlet.tleubay.auklglsqincnfqquekkn.service.impl.postgres;
 
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.ContactDTO;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByIdRequest;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByPhoneNumberRequest;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.entity.postgres.PostgresContact;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.exception.ContactException;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.mapper.postgres.PostgresContactMapper;
@@ -64,12 +66,22 @@ public class PostgresContactService implements ContactService {
     }
 
     @Override
-    public ContactDTO updateContactById(UUID id) {
-        return null;
+    public ContactDTO updateContactById(UUID id, UpdateContactByIdRequest requestBody) {
+        repository.findById(id).orElseThrow(() ->
+                new ContactException(String.format("Contact with id={%s} not found", id)));
+        PostgresContact updatedContact = repository.save(mapper.toEntity(id, requestBody));
+
+        return mapper.toDTO(updatedContact);
     }
 
     @Override
-    public ContactDTO updateContactByPhoneNumber(String phoneNumber) {
-        return null;
+    public ContactDTO updateContactByPhoneNumber(String phoneNumber, UpdateContactByPhoneNumberRequest requestBody) {
+        repository.findByPhoneNumberOrSecondPhoneNumber(phoneNumber, phoneNumber)
+                .orElseThrow(() ->
+                        new ContactException(String.format("Contact with phone_number={%s} not found", phoneNumber)));
+
+        PostgresContact updatedContact = repository.save(mapper.toEntity(phoneNumber, requestBody));
+
+        return mapper.toDTO(updatedContact);
     }
 }

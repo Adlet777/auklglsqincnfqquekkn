@@ -1,6 +1,8 @@
 package dev.adlet.tleubay.auklglsqincnfqquekkn.service;
 
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.ContactDTO;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByIdRequest;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByPhoneNumberRequest;
 import org.springframework.data.domain.Page;
 
 import java.util.UUID;
@@ -16,7 +18,7 @@ public interface ContactService {
 
     void deleteContactByPhoneNumber(String phoneNumber);
 
-    ContactDTO updateContactById(UUID id);
+    ContactDTO updateContactById(UUID id, UpdateContactByIdRequest requestBody);
 
-    ContactDTO updateContactByPhoneNumber(String phoneNumber);
+    ContactDTO updateContactByPhoneNumber(String phoneNumber, UpdateContactByPhoneNumberRequest requestBody);
 }
