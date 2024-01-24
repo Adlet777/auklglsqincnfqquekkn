@@ -18,9 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * todo: add logs/mapping/exceptions
- */
 @Service
 public class MongoContactService implements ContactService {
     private final MongoContactRepository repository;

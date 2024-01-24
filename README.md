@@ -1,2 +1,2 @@
-todo: add logs
-TestNG
+TestNG       
+add postman collection to root directory                        
