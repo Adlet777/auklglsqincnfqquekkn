@@ -5,12 +5,12 @@ import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByIdRequest;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByPhoneNumberRequest;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.entity.postgres.PostgresContact;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
-import java.util.UUID;
 
 @Mapper(componentModel = "spring")
 public interface PostgresContactMapper {
     ContactDTO toDTO(PostgresContact contact);
-    PostgresContact toEntity(UUID id, UpdateContactByIdRequest requestBody);
-    PostgresContact toEntity(String phoneNumber, UpdateContactByPhoneNumberRequest requestBody);
+    PostgresContact toEntity(@MappingTarget PostgresContact updatedContact, UpdateContactByIdRequest requestBody);
+    PostgresContact toEntity(@MappingTarget PostgresContact updatedContact, UpdateContactByPhoneNumberRequest requestBody);
 }

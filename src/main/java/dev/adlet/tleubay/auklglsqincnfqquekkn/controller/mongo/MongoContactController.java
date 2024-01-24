@@ -1,6 +1,8 @@
 package dev.adlet.tleubay.auklglsqincnfqquekkn.controller.mongo;
 
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.ContactDTO;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByIdRequest;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByPhoneNumberRequest;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.service.ContactService;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.service.impl.mongo.MongoContactService;
 import org.springframework.data.domain.Page;
@@ -43,5 +45,18 @@ public class MongoContactController {
     public ResponseEntity<Void> deleteMongoContactByPhoneNumber(@PathVariable String phoneNumber) {
         service.deleteContactByPhoneNumber(phoneNumber);
         return ResponseEntity.ok().build();
+    }
+
+    //todo: add validation
+    @PutMapping("/{id}")
+    public ResponseEntity<ContactDTO> updateMongoContactById(@PathVariable UUID id, @RequestBody UpdateContactByIdRequest request) {
+        ContactDTO updatedContact = service.updateContactById(id, request);
+        return ResponseEntity.ok(updatedContact);
+    }
+
+    @PutMapping("/phone-number/{phoneNumber}")
+    public ResponseEntity<ContactDTO> updateMongoContactByPhoneNumber(@PathVariable String phoneNumber, @RequestBody UpdateContactByPhoneNumberRequest request) {
+        ContactDTO updatedContact = service.updateContactByPhoneNumber(phoneNumber, request);
+        return ResponseEntity.ok(updatedContact);
     }
 }

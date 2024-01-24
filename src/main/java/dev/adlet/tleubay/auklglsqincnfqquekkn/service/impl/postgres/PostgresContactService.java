@@ -67,20 +67,22 @@ public class PostgresContactService implements ContactService {
 
     @Override
     public ContactDTO updateContactById(UUID id, UpdateContactByIdRequest requestBody) {
-        repository.findById(id).orElseThrow(() ->
+        PostgresContact updatedContact = repository.findById(id).orElseThrow(() ->
                 new ContactException(String.format("Contact with id={%s} not found", id)));
-        PostgresContact updatedContact = repository.save(mapper.toEntity(id, requestBody));
+        mapper.toEntity(updatedContact, requestBody);
+        repository.save(updatedContact);
 
         return mapper.toDTO(updatedContact);
     }
 
     @Override
     public ContactDTO updateContactByPhoneNumber(String phoneNumber, UpdateContactByPhoneNumberRequest requestBody) {
-        repository.findByPhoneNumberOrSecondPhoneNumber(phoneNumber, phoneNumber)
+        PostgresContact updatedContact = repository.findByPhoneNumberOrSecondPhoneNumber(phoneNumber, phoneNumber)
                 .orElseThrow(() ->
                         new ContactException(String.format("Contact with phone_number={%s} not found", phoneNumber)));
 
-        PostgresContact updatedContact = repository.save(mapper.toEntity(phoneNumber, requestBody));
+        mapper.toEntity(updatedContact, requestBody);
+        repository.save(updatedContact);
 
         return mapper.toDTO(updatedContact);
     }

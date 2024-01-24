@@ -1,6 +1,8 @@
 package dev.adlet.tleubay.auklglsqincnfqquekkn.controller.postgres;
 
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.ContactDTO;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByIdRequest;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByPhoneNumberRequest;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.service.ContactService;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.service.impl.postgres.PostgresContactService;
 import org.springframework.data.domain.Page;
@@ -43,5 +45,17 @@ public class PostgresContactController {
     public ResponseEntity<Void> deletePostgresContactByPhoneNumber(@PathVariable String phoneNumber) {
         service.deleteContactByPhoneNumber(phoneNumber);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ContactDTO> updatePostgresContactById(@PathVariable UUID id, @RequestBody UpdateContactByIdRequest request) {
+        ContactDTO updatedContact = service.updateContactById(id, request);
+        return ResponseEntity.ok(updatedContact);
+    }
+
+    @PutMapping("/phone-number/{phoneNumber}")
+    public ResponseEntity<ContactDTO> updatePostgresContactByPhoneNumber(@PathVariable String phoneNumber, @RequestBody UpdateContactByPhoneNumberRequest request) {
+        ContactDTO updatedContact = service.updateContactByPhoneNumber(phoneNumber, request);
+        return ResponseEntity.ok(updatedContact);
     }
 }
