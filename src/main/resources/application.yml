@@ -18,3 +18,4 @@ spring:
     mongodb:
       uri: mongodb+srv://user:DeEdgqXGvAMCd4YP@${spring.data.mongodb.database}.peb9hqn.mongodb.net/?retryWrites=true&w=majority
       database: cluster0
+      auto-index-creation: true

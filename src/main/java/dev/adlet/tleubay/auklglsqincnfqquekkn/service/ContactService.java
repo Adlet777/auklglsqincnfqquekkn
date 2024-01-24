@@ -1,5 +1,6 @@
 package dev.adlet.tleubay.auklglsqincnfqquekkn.service;
 
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.FilterDTO;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.ContactDTO;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByIdRequest;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByPhoneNumberRequest;
@@ -8,7 +9,7 @@ import org.springframework.data.domain.Page;
 import java.util.UUID;
 
 public interface ContactService {
-    Page<ContactDTO> getAllContacts();  //todo: add Filter
+    Page<ContactDTO> getAllContacts(FilterDTO filter);
 
     ContactDTO getContactById(UUID id);
 

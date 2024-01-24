@@ -1,5 +1,6 @@
 package dev.adlet.tleubay.auklglsqincnfqquekkn.controller.postgres;
 
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.FilterDTO;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.ContactDTO;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByIdRequest;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByPhoneNumberRequest;
@@ -21,8 +22,8 @@ public class PostgresContactController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ContactDTO>> getAllPostgresContacts() {
-        return ResponseEntity.ok(service.getAllContacts());
+    public ResponseEntity<Page<ContactDTO>> getAllPostgresContacts(FilterDTO filter) {
+        return ResponseEntity.ok(service.getAllContacts(filter));
     }
 
     @GetMapping("/{id}")

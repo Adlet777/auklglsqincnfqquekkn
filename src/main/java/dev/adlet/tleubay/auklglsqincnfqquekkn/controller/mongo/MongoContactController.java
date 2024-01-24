@@ -1,6 +1,7 @@
 package dev.adlet.tleubay.auklglsqincnfqquekkn.controller.mongo;
 
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.ContactDTO;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.FilterDTO;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByIdRequest;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByPhoneNumberRequest;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.service.ContactService;
@@ -21,8 +22,8 @@ public class MongoContactController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ContactDTO>> getAllMongoContacts() {
-        return ResponseEntity.ok(service.getAllContacts());
+    public ResponseEntity<Page<ContactDTO>> getAllMongoContacts(FilterDTO filter) {
+        return ResponseEntity.ok(service.getAllContacts(filter));
     }
 
     @GetMapping("/{id}")

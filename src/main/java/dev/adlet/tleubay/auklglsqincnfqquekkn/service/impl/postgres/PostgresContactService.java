@@ -1,5 +1,6 @@
 package dev.adlet.tleubay.auklglsqincnfqquekkn.service.impl.postgres;
 
+import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.FilterDTO;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.ContactDTO;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByIdRequest;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.dto.UpdateContactByPhoneNumberRequest;
@@ -8,6 +9,7 @@ import dev.adlet.tleubay.auklglsqincnfqquekkn.exception.ContactException;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.mapper.postgres.PostgresContactMapper;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.repository.postgres.PostgresContactRepository;
 import dev.adlet.tleubay.auklglsqincnfqquekkn.service.ContactService;
+import dev.adlet.tleubay.auklglsqincnfqquekkn.util.ContactsCustomPaginator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -27,10 +29,12 @@ public class PostgresContactService implements ContactService {
     }
 
     @Override
-    public Page<ContactDTO> getAllContacts() {
+    public Page<ContactDTO> getAllContacts(FilterDTO filter) {
         List<ContactDTO> contacts = repository.findAll()
                 .stream()
                 .map(mapper::toDTO).toList();
+
+        contacts = ContactsCustomPaginator.paginateContactsByFilter(contacts, filter);
         return new PageImpl<>(contacts);
     }
 
