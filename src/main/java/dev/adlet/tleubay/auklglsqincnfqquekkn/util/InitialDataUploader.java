@@ -25,7 +25,7 @@ public class InitialDataUploader {
     private final PostgresContactRepository postgresRepository;
 
     @Value(value = "${initial-data-uploader.entries}")
-    private int entries;
+    public int entries;
 
     public InitialDataUploader(MongoContactRepository mongoRepository, PostgresContactRepository postgresRepository) {
         this.mongoRepository = mongoRepository;

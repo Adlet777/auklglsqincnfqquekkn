@@ -1,2 +1,1 @@
-TestNG       
-add postman collection to root directory                        
+./gradlew build                         
